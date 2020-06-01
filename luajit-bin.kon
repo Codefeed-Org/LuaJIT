@@ -1,0 +1,34 @@
+description=LuaJit binaries
+version=1.0.0
+private=true
+author=Thomas Kunze
+dependencies{
+  buildvm=pkg
+}
+build{
+  includes[
+    src
+  ]
+  sources[
+    src/lj_*.c
+    src/lib_*.c
+  ]
+  libs[
+    lj_*.obj
+    lib_*.obj
+    src/lj_*.obj
+  ]
+  target=static
+  output=lib/lua51.lib
+  export{
+    includes[
+      src
+    ]
+    librarypaths[
+      lib
+    ]
+    libs[
+      lua51.lib
+    ]
+  }
+}
