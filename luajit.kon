@@ -1,4 +1,4 @@
-description=LuaJit binaries
+description=LuaJit
 version=1.0.0
 private=true
 author=Thomas Kunze
