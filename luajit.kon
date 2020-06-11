@@ -22,7 +22,7 @@ build{
   output=lib/lua51.lib
   export{
     includes[
-      lib
+      src
     ]
     librarypaths[
       lib
