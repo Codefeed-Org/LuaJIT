@@ -1,0 +1,11 @@
+build{
+  sources[
+    host/minilua.c
+  ]
+  onbuildcomplete[
+    command{
+      cmd=minilua ../dynasm/dynasm.lua -LN -D WIN -D JIT -D FFI -D P64 -o host/buildvm_arch.h vm_x86.dasc
+      creates=host/buildvm_arch.h
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+dependencies{
+  minilua=pkg
+}
+build{
+  sources[
+    host/buildvm.c
+    host/buildvm_asm.c
+    host/buildvm_fold.c
+    host/buildvm_lib.c
+    host/buildvm_peobj.c
+  ]
+  includes[
+    ../dynasm
+    .
+  ]
+  onbuildcomplete[
+    command{
+      cmd=buildvm -m peobj -o lj_vm.obj
+      creates=lj_vm.obj
+    }
+    command{
+      cmd=buildvm -m bcdef -o lj_bcdef.h lib_base.c lib_math.c lib_bit.c lib_string.c lib_table.c lib_io.c lib_os.c lib_package.c lib_debug.c lib_jit.c lib_ffi.c
+      creates=lj_bcdef.h
+    }
+    command{
+      cmd=buildvm -m ffdef -o lj_ffdef.h lib_base.c lib_math.c lib_bit.c lib_string.c lib_table.c lib_io.c lib_os.c lib_package.c lib_debug.c lib_jit.c lib_ffi.c
+      creates=lj_bcdef.h
+    }
+    command{
+      cmd=buildvm -m libdef -o lj_libdef.h lib_base.c lib_math.c lib_bit.c lib_string.c lib_table.c lib_io.c lib_os.c lib_package.c lib_debug.c lib_jit.c lib_ffi.c
+      creates=lj_libdef.h
+    }
+    command{
+      cmd=buildvm -m recdef -o lj_recdef.h lib_base.c lib_math.c lib_bit.c lib_string.c lib_table.c lib_io.c lib_os.c lib_package.c lib_debug.c lib_jit.c lib_ffi.c
+      creates=lj_recdef.h
+    }
+    command{
+      cmd=buildvm -m vmdef -o jit/vmdef.h lib_base.c lib_math.c lib_bit.c lib_string.c lib_table.c lib_io.c lib_os.c lib_package.c lib_debug.c lib_jit.c lib_ffi.c
+      creates=jit/vmdef.h
+    }
+    command{
+      cmd=buildvm -m folddef -o lj_folddef.h lj_opt_fold.c
+      creates=lj_folddef.h
+    }
+  ]  
+}
